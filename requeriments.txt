@@ -1,0 +1,9 @@
+alembic
+Flask-Login
+Flask-Mail
+Flask-Migrate
+Flask-SQLAlchemy
+psycopg2
+python-dateutil
+python-editor
+SQLAlchemy
