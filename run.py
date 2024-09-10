@@ -1,12 +1,6 @@
-from flask import Flask
-
-app = Flask(__name__)
-
-
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
+import os
+from app import create_app
 
 
-if __name__ == '__main__':
-    app.run()
+settings_module = os.getenv('APP_SETTINGS_MODULE')
+app = create_app(settings_module)
