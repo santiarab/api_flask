@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from os.path import abspath, dirname
 
 # Define the application directory
@@ -15,3 +16,10 @@ APP_ENV_DEVELOPMENT = 'development'
 APP_ENV_STAGING = 'staging'
 APP_ENV_PRODUCTION = 'production'
 APP_ENV = ''
+=======
+import os
+
+class Config:
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
+>>>>>>> 02204442b951446d6cb5401ade7015d89e25e12f
