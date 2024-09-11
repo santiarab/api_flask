@@ -9,3 +9,4 @@ python-editor
 SQLAlchemy
 python-dotenv
 Flask
+Werkzeug
