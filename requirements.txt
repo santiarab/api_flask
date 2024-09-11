@@ -1,2 +1,11 @@
-Flask~=3.0.3
-Flask-Migrate~=4.0.7
+alembic
+Flask-Login
+Flask-Mail
+Flask-Migrate
+Flask-SQLAlchemy
+psycopg2
+python-dateutil
+python-editor
+SQLAlchemy
+python-dotenv
+Flask

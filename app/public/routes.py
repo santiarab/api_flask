@@ -10,7 +10,28 @@ from . import public_bp
 # DELETE /tasks/<id>: Eliminar una tarea.
 
 
-
+# POST /tasks: Crear una nueva tarea.
 @public_bp.route('/tasks', methods=['POST'])
-def hello():
-    return jsonify({"message": "Hello, World!"})
+def post_task():
+    return "Esto es la raiz"
+
+# GET /tasks: Listar todas las tareas.
+@public_bp.route('/tasks', methods=['GET'])
+def list_tasks():
+    return "Esto es la raiz"
+
+# GET /tasks/<id>: Obtener una tarea específica.
+@public_bp.route('/tasks/<id>', methods=['GET'])
+def get_task(id):
+    return "Esto es la raiz"
+
+# PUT /tasks/<id>: Actualizar una tarea.
+@public_bp.route('/tasks/<id>', methods=['PUT'])
+def update_task(id):
+    return "Esto es la raiz"
+
+# DELETE /tasks/<id>: Eliminar una tarea.
+@public_bp.route('/', methods=['GET'])
+def delete_task():
+    return "Esto es la raiz"
+

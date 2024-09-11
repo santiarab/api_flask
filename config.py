@@ -1,25 +1,11 @@
-<<<<<<< HEAD
-from os.path import abspath, dirname
-
-# Define the application directory
-BASE_DIR = dirname(dirname(abspath(__file__)))
-
-SECRET_KEY = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe'
-
-# Database configuration
-SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-# App environments
-APP_ENV_LOCAL = 'local'
-APP_ENV_TESTING = 'testing'
-APP_ENV_DEVELOPMENT = 'development'
-APP_ENV_STAGING = 'staging'
-APP_ENV_PRODUCTION = 'production'
-APP_ENV = ''
-=======
+from dotenv import load_dotenv
 import os
 
+load_dotenv()
+
 class Config:
-    DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
->>>>>>> 02204442b951446d6cb5401ade7015d89e25e12f
+    USER_DB = os.getenv('POSTGRES_USER')
+    PWS_DB = os.getenv('POSTGRES_PASSWORD')
+    DB_NAME = os.getenv('POSTGRES_DB')
+    SECRET_KEY = os.getenv('SECRET_KEY')
+    SQLALCHEMY_DATABASE_URI = f"postgresql://{USER_DB}:{PWS_DB}@localhost/{DB_NAME}"
