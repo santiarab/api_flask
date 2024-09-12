@@ -39,6 +39,34 @@ API de creacion de tareas.
 
 ## Endpoints de la API
 
+### `POST /signup`
+Crea un nuevo usuario. Ejemplo de cuerpo de la solicitud:
+```json
+{
+  "username": "username",
+  "password": "password"
+}
+```
+
+### `POST /signin`
+Inicia sesion de un usuario. Ejemplo de cuerpo de la solicitud:
+```json
+{
+  "username": "username",
+  "password": "password"
+}
+```
+### `GET /login`
+Devuelve el usuario logeado. Ejemplo de cuerpo de la respuesta:
+```json
+{
+   "status": "success",
+   "message": "User: 'usuario actual' is already logged in!"
+}
+```
+### `POST /logout`
+Cierra sesion del usuario actual.
+
 ### `GET /tasks`
 Lista todas las tareas.
 
@@ -48,5 +76,16 @@ Crea una nueva tarea. Ejemplo de cuerpo de la solicitud:
 ```json
 {
   "title": "Nueva tarea",
-  "description": "Descripción opcional"
+  "description": "Descripción opcional",
+   "due_date_str": "Tiempo limite"
 }
+```
+### `GET /tasks/<id>`
+Obtener una tarea específica.
+
+### `PUT /tasks/<id>`
+Actualizar una tarea.
+
+### `DELETE /tasks/<id>`
+ Eliminar una tarea.
+

@@ -13,3 +13,5 @@ migrations/
 *.ini
 *.lock
 docker-compose.yml
+.idea
+
