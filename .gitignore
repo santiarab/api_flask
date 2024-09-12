@@ -1,0 +1,15 @@
+venv/
+env/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+instance/
+config.py
+*.log
+*.db
+migrations/
+*.ini
+*.lock
+docker-compose.yml

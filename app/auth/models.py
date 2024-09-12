@@ -33,9 +33,8 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'username': self.title,
-            'password': self.description,
-            'is_admin': self.due_date.isoformat() if self.due_date else None,
+            'username': self.username,
+            'is_admin': self.is_admin,
             'created_at': self.created_at.isoformat()
         }
 
