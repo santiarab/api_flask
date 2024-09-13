@@ -1,0 +1,30 @@
+{% extends "base_template.html" %}
+
+{% block title %}Create Task{% endblock %}
+
+{% block content %}
+    <div>
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.title.label }}
+                {{ form.title }}<br>
+            </div>
+            <div>
+                {{ form.description.label }}
+                {{ form.description }}<br>
+            </div>
+            <div>
+                {{ form.due_date.label }}
+                {{ form.due_date() }}<br>
+            </div>
+            <div>
+                {{ form.status.label }}
+                {{ form.status() }}<br>
+            </div>
+            <div>
+                {{ form.submit() }}
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "base_template.html" %}
+
+{% block title %}Task - Login{% endblock %}
+
+{% block content %}
+    Welcome to Task-API
+    <div><a href="{{ url_for('auth.signin') }}">Login</a></div>
+{% endblock %}

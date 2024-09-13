@@ -1,0 +1,21 @@
+{% extends "base_template.html" %}
+
+{% block title %}List Task{% endblock %}
+
+{% block content %}
+    <div>
+        {% for task in tasks %}
+            <div>
+                <a>ID: {{ task.id }}</a><br>
+                <a>Title: {{ task.title }}</a><br>
+                {% if task.description  %}
+                    <a>Description: {{ task.description }}</a><br>
+                {% endif %}
+                {% if task.due_date %}
+                    <a>Due Date: {{ task.due_date }}</a><br>
+                {% endif %}
+                <a>Created at: {{ task.created_at }}</a><br>
+            </div><br>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -14,4 +14,3 @@ migrations/
 *.lock
 docker-compose.yml
 .idea
-

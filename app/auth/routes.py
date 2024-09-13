@@ -1,67 +1,48 @@
-from flask import request,jsonify
+from flask import request, jsonify, render_template, redirect, url_for
 from . import auth_bp
+from .form import SignupForm, LoginForm
 from . models import User
 from flask_login import current_user, login_user, logout_user
 from app import login_manager
+from urllib.parse import urlparse
 
-@auth_bp.route('/signup', methods=['POST'])
-def signup():
-    data = request.json
-    username  = data.get('username')
-    password = data.get('password')
-
-    if username and password:
-        if User.get_by_username(username) is None:
+@auth_bp.route('/signup', methods=["GET", "POST"])
+def signup(next_page=None):
+    if current_user.is_authenticated:
+        return redirect(url_for('public.task'))
+    form = SignupForm()
+    error = None
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        user = User.get_by_username(username)
+        if user is not None:
+            error = f'Username already taken'
+        else:
             user = User(username=username)
             user.set_password(password)
             user.save()
-            login_user(user,remember=True)
-            return jsonify(response = {
-                'status': 'success',
-                'message': 'User created successfully'
-            }),200
-        else:
-            return jsonify({
-                'status': 'success',
-                'message': 'User already exists'
-            }),200
-    else:
-        return jsonify({
-            'status': 'error',
-            'message': 'Parameter username and password are required'
-        }),200
+            login_user(user, remember=True)
+            next_page = request.args.get('next', None)
+            if not next_page or urlparse(next_page).netloc != '':
+                next_page = url_for('public.task')
+            return redirect(next_page)
+    return render_template("signup_form.html", form=form, error=error)
 
-@auth_bp.route('/signin', methods=['POST'])
+@auth_bp.route('/signin', methods=["GET", "POST"])
 def signin():
-    data = request.json
-    username = data.get('username')
-    password = data.get('password')
-
-    if username and password:
-        user = User.get_by_username(username)
-        if user is None:
-            return jsonify({
-                'status': 'Error',
-                'message': 'User not found'
-            }),200
-        else:
-            if user.check_password(password):
-                login_user(user,remember=True)
-                return jsonify({
-                    'status': 'success',
-                    'message': 'User logged in'
-                }),200
-            else:
-                return jsonify( {
-                    'status': 'error',
-                    'message': 'Password is incorrect'
-                }),200
-    else:
-        return jsonify({
-            'status': 'error',
-            'message': 'Parameter username and password are required'
-        }),400
-
+    if current_user.is_authenticated:
+        return redirect(url_for('public.task'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.get_by_username(form.username.data)
+        if user is not None and user.check_password(form.password.data):
+            login_user(user, remember=form.remember_me.data)
+            next_page = request.args.get('next')
+            if not next_page or url_parse(next_page).netloc != '':
+                next_page = url_for('public.task')
+            return redirect(next_page)
+    return render_template('login_form.html', form=form)
 
 @auth_bp.route('/login', methods=['GET'])
 def login():
@@ -79,7 +60,7 @@ def login():
 @auth_bp.route('/logout')
 def logout():
     logout_user()
-    return jsonify({"status": "success"}),200
+    return redirect(url_for('public.index'))
 
 
 @login_manager.user_loader

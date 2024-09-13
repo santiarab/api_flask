@@ -1,0 +1,25 @@
+{% extends "base_template.html" %}
+
+{% block title %}Task{% endblock %}
+
+{% block content %}
+    <div>
+        <form action="{{ url_for('public.post_task') }}" method="get">
+            <button type="submit" class="btn btn-primary">Create Task</button>
+        </form>
+        <form action="{{ url_for('public.list_tasks') }}" method="get">
+            <button type="submit" class="btn btn-primary">List Task</button>
+        </form>
+        <form action="{{ url_for('public.get_task') }}" method="get">
+            <button type="submit" class="btn btn-primary">Get task</button>
+        </form>
+        <form action="{{ url_for('public.get_task_by_id') }}" method="get">
+            <button type="submit" class="btn btn-primary">Update Task</button>
+        </form>
+        <form action="{{ url_for('public.delete_task') }}" method="get">
+            <button type="submit" class="btn btn-primary">Delete Task</button>
+        </form>
+        <div><a href="{{ url_for('auth.logout') }}">LogOut</a></div>
+    </div>
+
+{% endblock %}

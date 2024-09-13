@@ -55,8 +55,8 @@ class Task(db.Model, UserMixin):
             'id': self.id,
             'title': self.title,
             'description': self.description,
-            'due_date': self.due_date.isoformat() if self.due_date else None,
-            'created_at': self.created_at.isoformat()
+            'due_date': self.due_date.strftime('%d-%m-%Y') if self.due_date else None,
+            'created_at': self.created_at.strftime('%d-%m-%Y %H:%M:%S') if self.created_at else None
         }
 
     @staticmethod
@@ -65,7 +65,7 @@ class Task(db.Model, UserMixin):
 
     @staticmethod
     def get_by_title(title):
-        return Task.query.filter_by(title=title).first()
+        return Task.query.filter_by(title=title)
 
     @staticmethod
     def get_all():
